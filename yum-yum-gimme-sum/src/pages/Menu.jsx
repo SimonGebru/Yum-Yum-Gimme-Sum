@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/cartSlice";
 import { fetchMenuData, setMenuType } from "../redux/menuSlice";
 import "../styles/menu.scss";
 import logo2 from "../assets/logo2.svg";
 import cartBox from "../assets/box.png";
 import cartIcon from "../assets/Union.svg";
+import { useNavigate } from "react-router-dom";
 
 const Menu = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const menu = useSelector((state) => state.menu.items) || [];
   const status = useSelector((state) => state.menu.status);
   const selectedType = useSelector((state) => state.menu.selectedType);
@@ -15,10 +18,6 @@ const Menu = () => {
   useEffect(() => {
     dispatch(fetchMenuData(selectedType)); // Hämta menyn baserat på typ
   }, [dispatch, selectedType]);
-
-  const handleTypeChange = (type) => {
-    dispatch(setMenuType(type)); // Byt kategori
-  };
 
   if (status === "loading") return <p>Laddar menyn...</p>;
   if (status === "failed") return <p>Det gick inte att hämta menyn.</p>;
@@ -31,8 +30,13 @@ const Menu = () => {
     <div className="menu-page">
       <img src={logo2} alt="Yum Yum Gimme Sum Logo" className="logo2" />
       <div className="cart-container">
-        <div alt="Cart Box" className="cart-box" />
-        <img src={cartIcon} alt="Cart Icon" className="cart-icon" />
+        <div className="cart-box" onClick={() => navigate("/cart")} /> {/* Navigera till cart */}
+        <img 
+          src={cartIcon} 
+          alt="Cart Icon" 
+          className="cart-icon" 
+          onClick={() => navigate("/cart")} 
+        />
         <span className="cart-badge">6</span>
       </div>
 
@@ -43,7 +47,11 @@ const Menu = () => {
         <ul>
           {otherItems.length > 0 ? (
             otherItems.map((item) => (
-                <li key={item.id} className="menu-item">
+              <li 
+                key={item.id} 
+                className="menu-item" 
+                onClick={() => dispatch(addToCart(item))}
+              >
                 <div className="menu-header">
                   <span className="menu-name">{item.name.toUpperCase()}</span>
                   <span className="menu-line"></span>

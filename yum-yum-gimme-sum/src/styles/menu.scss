@@ -100,6 +100,7 @@ body {
     margin-bottom: 14px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     border-top: 0.5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 
 
     .menu-header {
@@ -123,6 +124,11 @@ body {
       color: #ddd;
       margin-top: 5px;
     }
+    &:hover {
+        background-color: #827b7b; // Bakgrund ändras vid hover
+        color: white;
+        cursor: pointer;
+      }
   }
 }
 .menu-ingredients {
@@ -201,7 +207,7 @@ body {
     border-bottom: 1px dotted white;
     height: 1px;
     align-self: center;
-    margin-bottom: -2px; 
+    margin-bottom: -13px; 
     
   }
   
