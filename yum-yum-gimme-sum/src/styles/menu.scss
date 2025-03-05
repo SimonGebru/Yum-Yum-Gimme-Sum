@@ -1,103 +1,157 @@
 .menu-page {
-    width: 390px;
-    height: 844px;
-    background-size: cover;
-    background-position: center;
-    background-image: url("../assets/bg.png");
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
+  width: 390px;
+  height: 844px;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../assets/bg.png");
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+.menu-page {
+    background-color: #8ED8BF;
+    mix-blend-mode: multiply; // Blandar färgen med bakgrundsbilden
   }
-  
-  
-  .logo2 {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 50px;
+.logo2 {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+}
+
+.cart-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .cart-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 4px;
   }
-  
-  
-  .cart-container {
+
+  .cart-icon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    width: 31.99px;
+    height: 30.72px;
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-  
-    .cart-box {
-      width: 60px;
-    }
-  
-    .cart-icon {
-      position: absolute;
-      width: 25px;
-    }
-  
-    .cart-badge {
-      position: absolute;
-      top: 0;
-      right: 5px;
-      background-color: red;
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
+  }
+}
+
+// Menyrutan
+.menu-box {
+  width: 358px;
+  height: 689.75px;
+  background-color: #5c5252;
+  padding: 6px;
+  border-radius: 4px;
+
+  color: white;
+  margin-top: 80px;
+
+  h1 {
+    font-size: 24px;
+    text-align: left;
+    margin-top: 15px; // Ökar avståndet uppåt
+    margin-bottom: 26px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .menu-item {
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    .menu-header {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+
+    .menu-name {
+      font-size: 18px;
+    }
+
+    .menu-price {
+      font-size: 16px;
+    }
+
+    .menu-description {
+      font-size: 14px;
+      color: #ddd;
+      margin-top: 5px;
     }
   }
-  
-  // Menyrutan
-  .menu-box {
-    width: 358px;
-    height:689.75px;
-    background-color: #5c5252;
-    padding: 6px;
-    border-radius: 4px;
-    
-    color: white;
-    margin-top: 80px;
-  
-    h1 {
-      font-size: 24px;
-      text-align: left;
-    }
-  
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-  
-    .menu-item {
-      padding: 15px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      
-      .menu-header {
-        display: flex;
-        justify-content: space-between;
-        font-weight: bold;
-      }
-  
-      .menu-name {
-        font-size: 18px;
-      }
-  
-      .menu-price {
-        font-size: 16px;
-      }
-  
-      .menu-description {
-        font-size: 14px;
-        color: #ddd;
-        margin-top: 5px;
-      }
-    }
-  }
-  
+}
+.menu-ingredients {
+  line-height: 1.2; // Minska radavståndet om det behövs
+}
+.menu-dips-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.dips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.dip-item {
+  background-color: #5c5252;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Stil för knappar */
+.menu-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.menu-buttons button {
+  background: #222;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu-buttons button.active {
+  background: #444;
+}

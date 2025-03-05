@@ -13,15 +13,19 @@ const Menu = () => {
   const selectedType = useSelector((state) => state.menu.selectedType);
 
   useEffect(() => {
-    dispatch(fetchMenuData(selectedType)); // Hämta menyn för vald typ
+    dispatch(fetchMenuData(selectedType)); // Hämta menyn baserat på typ
   }, [dispatch, selectedType]);
 
   const handleTypeChange = (type) => {
-    dispatch(setMenuType(type)); //  Uppdatera vald kategori
+    dispatch(setMenuType(type)); // Byt kategori
   };
 
   if (status === "loading") return <p>Laddar menyn...</p>;
   if (status === "failed") return <p>Det gick inte att hämta menyn.</p>;
+
+  // Filtrera dippsåser och övriga rätter
+  const dips = menu.filter((item) => item.type === "dip");
+  const otherItems = menu.filter((item) => item.type !== "dip");
 
   return (
     <div className="menu-page">
@@ -35,24 +39,39 @@ const Menu = () => {
       <div className="menu-box">
         <h1>MENY</h1>
 
-      
-        
+        {/* Knappar för att byta kategori */}
+       
 
+        {/* Övriga rätter */}
         <ul>
-          {menu.length > 0 ? (
-            menu.map((item) => (
+          {otherItems.length > 0 ? (
+            otherItems.map((item) => (
               <li key={item.id} className="menu-item">
                 <div className="menu-header">
                   <span className="menu-name">{item.name.toUpperCase()}</span>
                   <span className="menu-price">................ {item.price} SEK</span>
                 </div>
-                <p className="menu-description">{item.description}</p>
+                {item.ingredients && (
+                  <p className="menu-ingredients">{item.ingredients.join(", ")}</p>
+                )}
               </li>
             ))
           ) : (
             <p>Menyn är tom.</p>
           )}
         </ul>
+
+        {/* Dippsåser sist */}
+        {dips.length > 0 && (
+          <>
+            <h2 className="menu-dips-header">DIPSÅS ................................... 19 SEK</h2>
+            <div className="dips-container">
+              {dips.map((dip) => (
+                <span key={dip.id} className="dip-item">{dip.name}</span>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
