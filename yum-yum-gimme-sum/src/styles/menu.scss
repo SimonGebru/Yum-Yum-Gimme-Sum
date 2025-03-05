@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: 'Fira Sans', sans-serif;
+  }
+
 .menu-page {
   width: 390px;
   height: 844px;
@@ -21,6 +27,7 @@
   width: 64px;
   height: 64px;
   border-radius: 4px;
+  margin-top: 7px;
 }
 
 .cart-container {
@@ -35,22 +42,26 @@
     width: 64px;
     height: 64px;
     border-radius: 4px;
+    background-color: #F4F3F1F0;
+    margin-top: 14px;
+    
   }
 
   .cart-icon {
     position: absolute;
     width: 31.99px;
     height: 30.72px;
+    top: 29px;
   }
 
   .cart-badge {
     position: absolute;
-    top: 0;
-    right: 5px;
-    background-color: red;
+    top: 5px;
+    right: -7px;
+    background-color: rgb(223, 87, 87);
     color: white;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 10px;
+    font-weight:400;
     border-radius: 50%;
     width: 20px;
     height: 20px;
@@ -73,9 +84,11 @@
 
   h1 {
     font-size: 24px;
+    font-weight: 700;
     text-align: left;
-    margin-top: 15px; // Ökar avståndet uppåt
-    margin-bottom: 26px;
+    margin-top: 10px; 
+    margin-bottom: 36px; 
+    padding-left: 6px;
   }
 
   ul {
@@ -84,8 +97,10 @@
   }
 
   .menu-item {
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 0.5px;
+
 
     .menu-header {
       display: flex;
@@ -95,6 +110,8 @@
 
     .menu-name {
       font-size: 18px;
+      padding-left: 6px;
+      font-weight: 700;
     }
 
     .menu-price {
@@ -109,7 +126,8 @@
   }
 }
 .menu-ingredients {
-  line-height: 1.2; // Minska radavståndet om det behövs
+  line-height: 1.2; 
+  padding-left: 8px;
 }
 .menu-dips-header {
   font-size: 1.2rem;
@@ -119,22 +137,32 @@
 }
 
 .dips-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-  justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 21px;
+    justify-items: center;
+  }
+  
+  .dip-item {
+    background-color: #827b7b;
+    border: 1px solid #ccc;
+    padding: 0px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    text-align: center;
+    width: 82px;
+    height: 41px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+  }
+.dip-item:hover{
+    background-color:#332d2d ;
+    border: 1px solid #5c5252; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; 
 }
-
-.dip-item {
-  background-color: #5c5252;
-  border: 1px solid #ccc;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
 /* Stil för knappar */
 .menu-buttons {
   display: flex;
@@ -155,3 +183,45 @@
 .menu-buttons button.active {
   background: #444;
 }
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .menu-name {
+    flex-shrink: 0; 
+  }
+  
+  .menu-line {
+    flex-grow: 1;
+    border-bottom: 1px dotted white;
+    height: 1px;
+    align-self: center;
+    margin-bottom: -2px; 
+    
+  }
+  
+  .menu-price {
+    min-width: 50px; 
+    text-align: right; 
+    white-space: nowrap; 
+    font-weight: 600;
+  }
+  
+  .menu-dips-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: left;
+  
+    .menu-line {
+      margin: 0 8px;
+    }
+  }
