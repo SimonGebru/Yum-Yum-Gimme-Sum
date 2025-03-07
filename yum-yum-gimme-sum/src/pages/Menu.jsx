@@ -14,15 +14,19 @@ const Menu = () => {
   const menu = useSelector((state) => state.menu.items) || [];
   const status = useSelector((state) => state.menu.status);
   const selectedType = useSelector((state) => state.menu.selectedType);
+  
+  
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   useEffect(() => {
-    dispatch(fetchMenuData(selectedType)); // Hämta menyn baserat på typ
-  }, [dispatch, selectedType]);
+    dispatch(fetchMenuData());
+  }, [dispatch]);
 
   if (status === "loading") return <p>Laddar menyn...</p>;
   if (status === "failed") return <p>Det gick inte att hämta menyn.</p>;
 
-  // Filtrera dippsåser och övriga rätter
+  
   const dips = menu.filter((item) => item.type === "dip");
   const otherItems = menu.filter((item) => item.type !== "dip");
 
@@ -30,14 +34,14 @@ const Menu = () => {
     <div className="menu-page">
       <img src={logo2} alt="Yum Yum Gimme Sum Logo" className="logo2" />
       <div className="cart-container">
-        <div className="cart-box" onClick={() => navigate("/cart")} /> {/* Navigera till cart */}
+        <div className="cart-box" onClick={() => navigate("/cart")} /> 
         <img 
           src={cartIcon} 
           alt="Cart Icon" 
           className="cart-icon" 
           onClick={() => navigate("/cart")} 
         />
-        <span className="cart-badge">6</span>
+        <span className="cart-badge">{cartItemCount}</span>
       </div>
 
       <div className="menu-box">
@@ -68,20 +72,26 @@ const Menu = () => {
         </ul>
 
         {/* Dippsåser sist */}
-        {dips.length > 0 && (
-          <>
-            <div className="menu-dips-header">
-              <span>DIPSÅS</span>
-              <span className="menu-line"></span>
-              <span className="menu-price">19 SEK</span>
-            </div>
-            <div className="dips-container">
-              {dips.map((dip) => (
-                <span key={dip.id} className="dip-item">{dip.name}</span>
-              ))}
-            </div>
-          </>
-        )}
+{dips.length > 0 && (
+  <>
+    <div className="menu-dips-header">
+      <span>DIPSÅS</span>
+      <span className="menu-line"></span>
+      <span className="menu-price">19 SEK</span>
+    </div>
+    <div className="dips-container">
+      {dips.map((dip) => (
+        <span
+          key={dip.id}
+          className="dip-item"
+          onClick={() => dispatch(addToCart(dip))}
+        >
+          {dip.name}
+        </span>
+      ))}
+    </div>
+  </>
+)}
       </div>
     </div>
   );

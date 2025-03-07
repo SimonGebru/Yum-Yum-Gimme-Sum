@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart, decreaseQuantity, addToCart } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { placeOrder } from "../redux/orderSlice"; 
 import "../styles/cart.scss";
 import cartIcon from "../assets/Union.svg";
 
@@ -9,10 +10,10 @@ const Cart = () => {
   const navigate = useNavigate();
   const { items, total } = useSelector((state) => state.cart);
 
+  // Om varukorgen är tom
   if (items.length === 0) {
     return (
       <div className="cart-page">
-        
         <img
           src={cartIcon}
           alt="Cart Icon"
@@ -23,6 +24,22 @@ const Cart = () => {
       </div>
     );
   }
+
+  const handleCheckout = async () => {
+    
+    const tenantId = localStorage.getItem("tenantId"); // 'td0o'
+
+const orderData = {
+  tenant: tenantId, // Alltså "td0o"
+  items,
+  total,
+};
+
+   
+    await dispatch(placeOrder(orderData));
+    
+    navigate("/order");
+  };
 
   return (
     <div className="cart-page">
@@ -57,7 +74,9 @@ const Cart = () => {
         <span className="cart-total-value">{total} SEK</span>
       </div>
 
-      <button className="checkout-btn">TAKE MY MONEY!</button>
+      <button className="checkout-btn" onClick={handleCheckout}>
+        TAKE MY MONEY!
+      </button>
     </div>
   );
 };

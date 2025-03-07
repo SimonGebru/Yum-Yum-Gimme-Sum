@@ -1,15 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchMenu } from "../api/api";
 
-const TENANT_NAME = "SimonsFoodTruck";
-
-// Hämta menyn för vald typ
+// Hämta menyn (både wonton och dip)
 export const fetchMenuData = createAsyncThunk(
   "menu/fetchMenuData",
-  async (type, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const menu = await fetchMenu(TENANT_NAME, type);
-      return menu.sort((a, b) => (a.type === "dip" ? 1 : b.type === "dip" ? -1 : 0)); 
+      const menu = await fetchMenu(); 
+      // Sortera så att dip hamnar sist
+      return menu.sort((a, b) => (a.type === "dip" ? 1 : b.type === "dip" ? -1 : 0));
     } catch (error) {
       return rejectWithValue(error.message);
     }

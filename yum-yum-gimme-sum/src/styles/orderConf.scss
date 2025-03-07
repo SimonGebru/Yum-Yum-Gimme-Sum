@@ -1,0 +1,67 @@
+.order-confirmation-page {
+    position: relative;
+    width: 390px;
+    margin: 0 auto;
+    background: #605858;
+    min-height: 844px;
+    padding: 20px;
+    text-align: center;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Logo i övre vänstra hörnet */
+  .order-logo {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 64px;
+    height: 64px;
+    margin-top: 30px;
+    margin-left: 8px;
+  }
+  
+  /* Container för lunchboxbilden */
+  .order-image-container {
+    margin: 40px auto;
+  }
+  
+  .order-lunchbox {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .order-confirmation-page h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .order-confirmation-page p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .order-confirmation-page span {
+    font-weight: bold;
+  }
+  
+  .proceed-btn {
+    background-color: #353131;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 20px;
+  }
+  
+  .proceed-btn:hover {
+    background-color: #444;
+  }
