@@ -8,42 +8,32 @@ export const placeOrder = createAsyncThunk(
   "order/placeOrder",
   async (orderData, { rejectWithValue }) => {
     try {
-      // Hämta API-nyckeln dynamiskt
       const apiKey = await getApiKey();
-
-      
       const tenantId = localStorage.getItem("tenantId") || "SimonFoodTruck";
-      console.log("Skickar order med items:", orderData.items);
-      console.log("Använder tenant:", tenantId);
-
       
       const itemIds = orderData.items.flatMap(item =>
         Array(item.quantity).fill(item.id)
       );
-      console.log("Skickar order med itemIds:", itemIds);
 
-      
       const response = await fetch(`${API_BASE_URL}/${tenantId}/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "x-zocom": apiKey,
         },
-        body: JSON.stringify({
-          items: itemIds
-        }),
+        body: JSON.stringify({ items: itemIds }),
       });
 
       if (!response.ok) {
-        console.log("Status code:", response.status);
         const errorText = await response.text();
+        console.log("Status code:", response.status);
         console.log("Error text from server:", errorText);
         throw new Error("Order kunde inte läggas");
       }
 
       const data = await response.json();
-      // API:et returnerar förväntat { orderNumber, eta, ... }
-      return data;
+      console.log("API response:", data); // För felsökning
+      return data; 
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -65,8 +55,8 @@ const orderSlice = createSlice({
         state.status = "loading";
       })
       .addCase(placeOrder.fulfilled, (state, action) => {
-        state.orderNumber = action.payload.orderNumber;
-        state.eta = action.payload.eta;
+        state.orderNumber = action.payload.order.id; 
+        state.eta = action.payload.order.eta;        
         state.status = "succeeded";
       })
       .addCase(placeOrder.rejected, (state, action) => {

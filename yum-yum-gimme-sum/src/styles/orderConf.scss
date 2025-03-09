@@ -55,13 +55,32 @@
     color: white;
     border: none;
     padding: 15px 20px;
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 700;
     cursor: pointer;
     text-transform: uppercase;
     margin-top: 20px;
+    width: 383px;
+    height: 77px;
+    margin-left: 3px;
+
   }
   
   .proceed-btn:hover {
     background-color: #444;
+  }
+  .receipt-btn {
+    background-color: #605858;
+    color: #F4F3F1;
+    border: 1px solid #F4F3F1;
+    padding: 15px 20px;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 20px;
+    width: 383px;
+    height: 77px;
+    margin-left: 3px;
+
   }
