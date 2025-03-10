@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
-import { fetchMenuData, setMenuType } from "../redux/menuSlice";
+import { fetchMenuData } from "../redux/menuSlice";
 import "../styles/menu.scss";
 import logo2 from "../assets/logo2.svg";
 import cartBox from "../assets/box.png";
@@ -13,9 +13,7 @@ const Menu = () => {
   const navigate = useNavigate();
   const menu = useSelector((state) => state.menu.items) || [];
   const status = useSelector((state) => state.menu.status);
-  const selectedType = useSelector((state) => state.menu.selectedType);
-  
-  
+
   const cartItems = useSelector((state) => state.cart.items);
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -26,9 +24,9 @@ const Menu = () => {
   if (status === "loading") return <p>Laddar menyn...</p>;
   if (status === "failed") return <p>Det gick inte att hämta menyn.</p>;
 
-  
   const dips = menu.filter((item) => item.type === "dip");
-  const otherItems = menu.filter((item) => item.type !== "dip");
+  const drinks = menu.filter((item) => item.type === "drink");
+  const otherItems = menu.filter((item) => item.type !== "dip" && item.type !== "drink");
 
   return (
     <div className="menu-page">
@@ -71,27 +69,49 @@ const Menu = () => {
           )}
         </ul>
 
-        {/* Dippsåser sist */}
-{dips.length > 0 && (
-  <>
-    <div className="menu-dips-header">
-      <span>DIPSÅS</span>
-      <span className="menu-line"></span>
-      <span className="menu-price">19 SEK</span>
-    </div>
-    <div className="dips-container">
-      {dips.map((dip) => (
-        <span
-          key={dip.id}
-          className="dip-item"
-          onClick={() => dispatch(addToCart(dip))}
-        >
-          {dip.name}
-        </span>
-      ))}
-    </div>
-  </>
-)}
+        {/* Dippsåser */}
+        {dips.length > 0 && (
+          <>
+            <div className="menu-dips-header">
+              <span>DIPSÅS</span>
+              <span className="menu-line"></span>
+              <span className="menu-price">19 SEK</span>
+            </div>
+            <div className="dips-container">
+              {dips.map((dip) => (
+                <span
+                  key={dip.id}
+                  className="dip-item"
+                  onClick={() => dispatch(addToCart(dip))}
+                >
+                  {dip.name}
+                </span>
+              ))}
+            </div>
+          </>
+        )}
+
+        {/* Drinksektion med scroll */}
+        {drinks.length > 0 && (
+          <div className="drinks-section">
+            <h2 className="drink-section-title">DRYCKER</h2>
+            <ul className="drinks-container">
+              {drinks.map((drink) => (
+                <li
+                  key={drink.id}
+                  className="menu-item"
+                  onClick={() => dispatch(addToCart(drink))}
+                >
+                  <div className="menu-header">
+                    <span className="menu-name">{drink.name.toUpperCase()}</span>
+                    <span className="menu-line"></span>
+                    <span className="menu-price">{drink.price} SEK</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

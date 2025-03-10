@@ -61,24 +61,22 @@ export async function createTenant(apiKey) {
     console.error("🚨 Fel vid skapande av tenant:", error);
     throw error;
   }
-}
-
+};
 
 export const fetchMenu = async () => {
   try {
     const apiKey = await getApiKey();
 
-    
     let tenantId = localStorage.getItem("tenantId");
-
-    
     if (!tenantId) {
       tenantId = "SimonsFoodTruck";
     }
 
     console.log("📥 Hämtar meny för tenant:", tenantId);
 
-    const categories = ["wonton", "dip"];
+    // Här är ändringen: Lägg till "drink"
+    const categories = ["wonton", "dip", "drink"];
+
     const menuRequests = categories.map((category) =>
       fetch(`${API_BASE_URL}/menu?tenant=${tenantId}&type=${category}`, {
         headers: { "x-zocom": apiKey },
@@ -87,7 +85,6 @@ export const fetchMenu = async () => {
 
     const menuData = await Promise.all(menuRequests);
 
-    
     const allItems = menuData.flatMap((data) => data.items || []);
 
     console.log("✅ Menydata hämtad:", allItems);
