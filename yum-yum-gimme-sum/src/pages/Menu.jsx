@@ -1,16 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/cartSlice";
 import { fetchMenuData } from "../redux/menuSlice";
 import "../styles/menu.scss";
 import logo2 from "../assets/logo2.svg";
-import cartBox from "../assets/box.png";
 import cartIcon from "../assets/Union.svg";
 import { useNavigate } from "react-router-dom";
+import DropdownMenu from "../components/DropdownMenu";
+import MenuItem from "../components/MenuItem";
+import DipItem from "../components/DipItem";
 
 const Menu = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
   const menu = useSelector((state) => state.menu.items) || [];
   const status = useSelector((state) => state.menu.status);
 
@@ -30,7 +34,10 @@ const Menu = () => {
 
   return (
     <div className="menu-page">
-      <img src={logo2} alt="Yum Yum Gimme Sum Logo" className="logo2" />
+      <img src={logo2} alt="Yum Yum Gimme Sum Logo" className="logo2" onClick={toggleMenu} />
+
+      <DropdownMenu isOpen={menuOpen} toggleMenu={toggleMenu} />
+
       <div className="cart-container">
         <div className="cart-box" onClick={() => navigate("/cart")} /> 
         <img 
@@ -39,75 +46,39 @@ const Menu = () => {
           className="cart-icon" 
           onClick={() => navigate("/cart")} 
         />
-        <span className="cart-badge">{cartItemCount}</span>
+        <span className="cart-badge">{cartItems.reduce((total, item) => total + item.quantity, 0)}</span>
       </div>
 
       <div className="menu-box">
         <h1>MENY</h1>
 
-        {/* Övriga rätter */}
         <ul>
-          {otherItems.length > 0 ? (
-            otherItems.map((item) => (
-              <li 
-                key={item.id} 
-                className="menu-item" 
-                onClick={() => dispatch(addToCart(item))}
-              >
-                <div className="menu-header">
-                  <span className="menu-name">{item.name.toUpperCase()}</span>
-                  <span className="menu-line"></span>
-                  <span className="menu-price">{item.price} SEK</span>
-                </div>
-                {item.ingredients && (
-                  <p className="menu-ingredients">{item.ingredients.join(", ")}</p>
-                )}
-              </li>
-            ))
-          ) : (
-            <p>Menyn är tom.</p>
-          )}
+          {menu.filter(item => item.type !== 'dip' && item.type !== 'drink').map(item => (
+            <MenuItem key={item.id} item={item} /> 
+          ))}
         </ul>
 
-        {/* Dippsåser */}
         {dips.length > 0 && (
-          <>
-            <div className="menu-dips-header">
-              <span>DIPSÅS</span>
-              <span className="menu-line"></span>
-              <span className="menu-price">19 SEK</span>
-            </div>
-            <div className="dips-container">
-              {dips.map((dip) => (
-                <span
-                  key={dip.id}
-                  className="dip-item"
-                  onClick={() => dispatch(addToCart(dip))}
-                >
-                  {dip.name}
-                </span>
-              ))}
-            </div>
-          </>
-        )}
+  <>
+    <div className="menu-dips-header">
+      <span>DIPSÅS</span>
+      <span className="menu-line"></span>
+      <span className="menu-price">19 SEK</span>
+    </div>
+    <div className="dips-container">
+      {dips.map((dip) => (
+        <DipItem key={dip.id} dip={dip} />
+      ))}
+    </div>
+  </>
+)}
 
-        {/* Drinksektion med scroll */}
         {drinks.length > 0 && (
           <div className="drinks-section">
             <h2 className="drink-section-title">DRYCKER</h2>
             <ul className="drinks-container">
               {drinks.map((drink) => (
-                <li
-                  key={drink.id}
-                  className="menu-item"
-                  onClick={() => dispatch(addToCart(drink))}
-                >
-                  <div className="menu-header">
-                    <span className="menu-name">{drink.name.toUpperCase()}</span>
-                    <span className="menu-line"></span>
-                    <span className="menu-price">{drink.price} SEK</span>
-                  </div>
-                </li>
+                <MenuItem key={drink.id} item={drink} />  
               ))}
             </ul>
           </div>

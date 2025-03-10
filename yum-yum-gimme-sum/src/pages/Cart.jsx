@@ -1,16 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart, decreaseQuantity, addToCart } from "../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { placeOrder } from "../redux/orderSlice"; 
+import { placeOrder } from "../redux/orderSlice";
 import "../styles/cart.scss";
 import cartIcon from "../assets/Union.svg";
+import CartItem from "../components/CartItem";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { items, total } = useSelector((state) => state.cart);
 
-  // Om varukorgen är tom
   if (items.length === 0) {
     return (
       <div className="cart-page">
@@ -26,18 +25,14 @@ const Cart = () => {
   }
 
   const handleCheckout = async () => {
-    
-    const tenantId = localStorage.getItem("tenantId"); // 'td0o'
+    const tenantId = localStorage.getItem("tenantId");
+    const orderData = {
+      tenant: tenantId,
+      items,
+      total,
+    };
 
-const orderData = {
-  tenant: tenantId, // Alltså "td0o"
-  items,
-  total,
-};
-
-   
     await dispatch(placeOrder(orderData));
-    
     navigate("/order");
   };
 
@@ -52,20 +47,7 @@ const orderData = {
 
       <ul className="cart-items">
         {items.map((item) => (
-          <li key={item.id} className="cart-item">
-            <div className="cart-header">
-              <span className="cart-name">{item.name.toUpperCase()}</span>
-              <span className="cart-line"></span>
-              <span className="cart-price">{item.price * item.quantity} SEK</span>
-            </div>
-
-            <div className="cart-controls">
-              <button className="control-btn" onClick={() => dispatch(decreaseQuantity(item))}>–</button>
-              <span className="quantity">{item.quantity}</span>
-              <button className="control-btn" onClick={() => dispatch(addToCart(item))}>+</button>
-              <button className="trash-btn" onClick={() => dispatch(removeFromCart(item))}>🗑</button>
-            </div>
-          </li>
+          <CartItem key={item.id} item={item} />
         ))}
       </ul>
 
