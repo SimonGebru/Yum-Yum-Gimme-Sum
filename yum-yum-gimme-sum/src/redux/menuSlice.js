@@ -1,13 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchMenu } from "../api/api";
+import { fetchMenu } from "../services/apiService"; // 🔹 Uppdaterad import
 
-// Hämta menyn (både wonton och dip)
+
 export const fetchMenuData = createAsyncThunk(
   "menu/fetchMenuData",
   async (_, { rejectWithValue }) => {
     try {
       const menu = await fetchMenu(); 
-      // Sortera så att dip hamnar sist
       return menu.sort((a, b) => (a.type === "dip" ? 1 : b.type === "dip" ? -1 : 0));
     } catch (error) {
       return rejectWithValue(error.message);

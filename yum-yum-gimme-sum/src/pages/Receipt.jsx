@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { clearCart } from "../redux/cartSlice";
 import logoCorner from "../assets/logo2.svg";
 import DropdownMenu from "../components/DropdownMenu";
-import ReceiptComp from "../components/ReceiptComp";
+import ReceiptComp from "../components/Receiptcomp";
 import { useState } from "react";
 import "../styles/receipt.scss";
 
@@ -34,6 +34,9 @@ const Receipt = () => {
         total={total}
         handleNewOrder={handleNewOrder}
       />
+      <button className="new-order-btn" onClick={handleNewOrder}>
+        GÖR EN NY BESTÄLLNING
+      </button>
     </div>
   );
 };

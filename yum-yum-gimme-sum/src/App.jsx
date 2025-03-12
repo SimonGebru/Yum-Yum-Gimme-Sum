@@ -4,12 +4,11 @@ import Cart from "./pages/Cart";
 import StartPage from "./pages/StartPage";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import Receipt from "./pages/Receipt";
-import Navbar from "./components/Navbar";
+
 
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="menu" element={<Menu />} />

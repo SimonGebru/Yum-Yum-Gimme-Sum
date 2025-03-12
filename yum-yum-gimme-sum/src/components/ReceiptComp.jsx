@@ -21,13 +21,12 @@ const ReceiptComp = ({ orderNumber, items, total, handleNewOrder }) => {
       </ul>
 
       <div className="receipt-total-box">
-        <span className="total-text">TOTALT</span>
-        <span className="total-price">{total} SEK</span>
-      </div>
-
-      <button className="new-order-btn" onClick={handleNewOrder}>
-        GÖR EN NY BESTÄLLNING
-      </button>
+   <div className="total-text">
+      <span>TOTALT</span>
+      <span className="moms">inkl 20% moms</span>
+   </div>
+   <span className="total-price">{total} SEK</span>
+</div>
     </div>
   );
 };

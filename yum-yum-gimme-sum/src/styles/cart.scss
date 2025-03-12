@@ -4,7 +4,7 @@
     width: 390px;
     margin: 0 auto;
     background: #eeeeee;
-    min-height: 844px;
+    min-height: 811px;
     display: flex;
     flex-direction: column;
     padding-top: 20px;
@@ -117,7 +117,7 @@
     font-size: 27px;
     margin-left: 8px;
     margin-right: 8px;
-    border-radius: 5px;
+    border-radius: 2px;
   }
   
   .cart-total-label {
@@ -131,7 +131,7 @@
   
   .checkout-btn {
     display: block;
-    width: 100%;
+    width: 96%;
     background-color: #222;
     color: white;
     border: none;
@@ -141,7 +141,8 @@
     text-transform: uppercase;
     margin-top: 0;
     font-size: 28px;
-    border-radius: 5px;
+    border-radius: 2px;
+    margin-left: 8px;
   }
   
   .checkout-btn:hover {

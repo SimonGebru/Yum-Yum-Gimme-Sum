@@ -1,11 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "Fira Sans", sans-serif;
+}
+
 .receipt-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #5f5251;
   width: 390px;
-  height: 844px;
-  font-family: Arial, sans-serif;
+  height: 831px;
   position: relative;
 }
 
@@ -35,7 +40,7 @@
 }
 
 h1 {
-  font-size: 26px;
+  font-size: 26px !important;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
@@ -86,14 +91,15 @@ h1 {
 
 .receipt-total-box {
   background-color: #c4c4c4;
-  padding: 16px;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 700;
-  margin-top: 2rem;
-  width: 302px;
+    padding: 17px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    margin-top: auto;
+    width: 100%;
+    margin-left: -17px;
 
   .total-text {
     display: flex;
@@ -115,7 +121,7 @@ h1 {
 
 .new-order-btn {
   padding: 15px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
   border: none;
   border-radius: 2px;
@@ -123,10 +129,15 @@ h1 {
   color: #ffffff;
   cursor: pointer;
   margin-top: 20px;
-  width: 352px;
+  width: 367px;
   height: 77px;
-  margin-left: -10px;
+  margin-left: 2px;
 
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 352px;
   &:hover {
     background-color: #282525;
   }

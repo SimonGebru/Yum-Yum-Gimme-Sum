@@ -6,7 +6,7 @@ const DropdownMenu = ({ isOpen, toggleMenu }) => {
 
   const handleNavigate = (path) => {
     navigate(path);
-    toggleMenu(); // stänger menyn efter navigering
+    toggleMenu(); 
   };
 
   if (!isOpen) return null;
