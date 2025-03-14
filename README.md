@@ -1,6 +1,6 @@
 # Yum-Yum-Gimme-Sum
 
-
+Länk till presentation av upgiften: https://youtu.be/M6h3a83oeqs?si=71YAigzdQ8-H-yAh
 Individuell examination: Yum Yum Gimme Sum
 Bakgrund
 
