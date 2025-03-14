@@ -1,7 +1,8 @@
+// Huvudfokus på konfiguering och autentisering
 const API_BASE_URL = "https://fdnzawlcf6.execute-api.eu-north-1.amazonaws.com";
 
 let cachedApiKey = null;
-
+// Sparar apinyckel och sparar den, om det inte finns hämtar jag en ny
 export const getApiKey = async () => {
   if (cachedApiKey) {
     console.log("🔄 Återanvänder API-nyckel:", cachedApiKey);
@@ -27,7 +28,7 @@ export const getApiKey = async () => {
     throw error;
   }
 };
-
+// Samma lika, skapar en tenant och sparar den
 export async function createTenant(apiKey) {
   let storedTenant = localStorage.getItem("tenantId");
 
@@ -63,33 +64,3 @@ export async function createTenant(apiKey) {
   }
 };
 
-export const fetchMenu = async () => {
-  try {
-    const apiKey = await getApiKey();
-
-    let tenantId = localStorage.getItem("tenantId");
-    if (!tenantId) {
-      tenantId = "SimonsFoodTruck";
-    }
-
-    console.log("📥 Hämtar meny för tenant:", tenantId);
-
-    const categories = ["wonton", "dip", "drink"];
-
-    const menuRequests = categories.map((category) =>
-      fetch(`${API_BASE_URL}/menu?tenant=${tenantId}&type=${category}`, {
-        headers: { "x-zocom": apiKey },
-      }).then((res) => res.json())
-    );
-
-    const menuData = await Promise.all(menuRequests);
-
-    const allItems = menuData.flatMap((data) => data.items || []);
-
-    console.log("✅ Menydata hämtad:", allItems);
-    return allItems;
-  } catch (error) {
-    console.error("🚨 Fel vid hämtning av meny:", error);
-    throw error;
-  }
-};

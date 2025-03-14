@@ -1,4 +1,5 @@
-// store.js
+// Lägger ihop alla reducers och sparar kundvagn vid sidladdning
+
 import { configureStore } from "@reduxjs/toolkit";
 import menuReducer from "./menuSlice";
 import cartReducer from "./cartSlice";

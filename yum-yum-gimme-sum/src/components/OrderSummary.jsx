@@ -1,7 +1,9 @@
+// Visar sammanfattning av ordern, med eta, ordernummer och låter dig gå vidare till kvitto
+
 import boxtop from "../assets/boxtop.png";
 
 const OrderSummary = ({ orderNumber, eta, handleProceed, handleReceipt }) => {
-
+// Räknar ut skillnaden mellan eta och tiden just nu 
   const calculateEtaMinutes = (eta) => {
     const diff = (new Date(eta) - new Date()) / 60000;
     return Math.round(diff);

@@ -1,3 +1,5 @@
+// Hanterar enbart rätterna
+
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
 

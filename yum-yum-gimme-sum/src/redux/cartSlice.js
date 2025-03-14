@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+// Hantering av kundvagn, Lägga till varor,ta bort, öka och minska(både genom att klicka på vara eller direkt i varukorgen)
 
+import { createSlice } from "@reduxjs/toolkit";
+// ger mig överblick, lagrar produkter i en array
 const cartSlice = createSlice({
   name: "cart",
   initialState: {

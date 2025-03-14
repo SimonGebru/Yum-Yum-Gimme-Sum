@@ -1,3 +1,5 @@
+//Huvudkomponenten för kundvagnen. Loopar genom kundvagnen (cart.items) och visar varje produkt med CartItem. Visar totalpris och låter användaren tömma hela kundvagnen.
+
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { placeOrder } from "../redux/orderSlice";
@@ -23,7 +25,7 @@ const Cart = () => {
       </div>
     );
   }
-
+// skapar orderdata som innehåller tot belopp och varor för att sen skicka det via placeorder 
   const handleCheckout = async () => {
     const tenantId = localStorage.getItem("tenantId");
     const orderData = {

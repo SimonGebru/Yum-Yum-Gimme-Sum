@@ -1,3 +1,5 @@
+// Hanterar enskilda produkter i vagnen, knappar för att öka, minska eller ta bort produkter.
+
 import { useDispatch } from "react-redux";
 import { removeFromCart, decreaseQuantity, addToCart } from "../redux/cartSlice";
 

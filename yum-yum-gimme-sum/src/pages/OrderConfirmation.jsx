@@ -1,3 +1,5 @@
+//Visar orderbekräftelsen efter att en beställning har skickats. Visar ordernummer och beräknad leveranstid (order.eta).
+
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../redux/cartSlice";
@@ -13,9 +15,9 @@ const OrderConfirmation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-
+// använder useSelector för att hämta ordernr och eta från redux
   const { orderNumber, eta, status, error } = useSelector((state) => state.order);
-
+// rensar localStorage och tar en tillbaka till menyn efter beställning 
   const handleProceed = () => {
     dispatch(clearCart());
     localStorage.removeItem("cart"); 

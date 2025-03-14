@@ -13,10 +13,10 @@ const Receipt = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-
+// Hämtar all information från redux via useSelector
   const { orderNumber } = useSelector((state) => state.order);
   const { items, total } = useSelector((state) => state.cart);
-
+// precis som i order rensar localStorage och tar en tillbaka till menyn efter beställning 
   const handleNewOrder = () => {
     dispatch(clearCart());
     localStorage.removeItem("cart");
@@ -27,7 +27,7 @@ const Receipt = () => {
     <div className="receipt-page">
       <img src={logoCorner} alt="Union Logo" className="union-logo" onClick={toggleMenu} />
       <DropdownMenu isOpen={menuOpen} toggleMenu={toggleMenu} />
-
+      {/*Här skickar jahg all kvittoinformation som props till ReceiptComp.jsx, inklusive ordernumret, produkterna och totalpriset.*/}
       <ReceiptComp
         orderNumber={orderNumber}
         items={items}

@@ -1,3 +1,5 @@
+// Hämytar menyn från redux genom useselector och loopar igenom rätterna
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMenuData } from "../redux/menuSlice";
@@ -21,13 +23,14 @@ const Menu = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
+  // meny hämtas när komponenten laddar 
   useEffect(() => {
     dispatch(fetchMenuData());
   }, [dispatch]);
 
   if (status === "loading") return <p>Laddar menyn...</p>;
   if (status === "failed") return <p>Det gick inte att hämta menyn.</p>;
-
+// Filtrering av allt vi hämtar 
   const dips = menu.filter((item) => item.type === "dip");
   const drinks = menu.filter((item) => item.type === "drink");
   const otherItems = menu.filter((item) => item.type !== "dip" && item.type !== "drink");

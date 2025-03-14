@@ -1,7 +1,9 @@
+// Hantering av menyn, hämtar menyn från api. Sparar datan i redux 
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchMenu } from "../services/apiService"; // 🔹 Uppdaterad import
+import { fetchMenu } from "../services/apiService"; 
 
-
+// hämtar menu från api och ser till så att dip är länsgt ner 
 export const fetchMenuData = createAsyncThunk(
   "menu/fetchMenuData",
   async (_, { rejectWithValue }) => {
@@ -13,7 +15,7 @@ export const fetchMenuData = createAsyncThunk(
     }
   }
 );
-
+//Sparar meny i tiems och håller koll på laddningsstatus
 const menuSlice = createSlice({
   name: "menu",
   initialState: { items: [], status: "idle", error: null, selectedType: "wonton" },

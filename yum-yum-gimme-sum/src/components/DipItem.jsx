@@ -1,3 +1,5 @@
+// Som menuItem men för dippar
+
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/cartSlice";
 
